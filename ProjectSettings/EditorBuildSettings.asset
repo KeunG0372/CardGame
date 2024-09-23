@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/IntroScene.unity
+    guid: 2708ef2bb7342c647adb282b13bef83c
+  - enabled: 1
+    path: Assets/Scenes/MovingScene.unity
+    guid: 45af6ee2810810346a51180d23d89ca9
+  - enabled: 1
+    path: Assets/Scenes/ComBatScene.unity
+    guid: c2b33265b2b65fe4a84c32b206170104
+  - enabled: 0
+    path: Assets/Scenes/Shop.unity
+    guid: 9fd8ae572f04a2c409a4522edcf0aa84
+  - enabled: 0
+    path: Assets/Scenes/Karma bad Ed.unity
+    guid: 354221395b8c59d4cacdbc82eb0cd899
+  - enabled: 0
+    path: Assets/Scenes/Karma bad talk.unity
+    guid: 34caeece938121e4c95c552ffeefeee5
+  - enabled: 1
+    path: Assets/Scenes/DeadScene.unity
+    guid: 90ad6ff01984f7b48a2051cca6f966d8
+  - enabled: 0
+    path: Assets/Scenes/Karma kind Ed.unity
+    guid: 12a6b0c3df410e84f9695530781f261f
+  - enabled: 0
+    path: Assets/Scenes/Karma kind talk.unity
+    guid: 874353bc029c902439c70753fd870267
+  m_configObjects: {}
