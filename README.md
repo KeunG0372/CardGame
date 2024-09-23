@@ -133,6 +133,13 @@
 - 화면
 + 임시 플레이어, 몬스터, 텍스트 배치
 
+![스크린샷 2024-09-23 161052](https://github.com/user-attachments/assets/c4a1a31d-62f6-4117-a95e-de9431998e5e)
+![스크린샷 2024-09-23 161056](https://github.com/user-attachments/assets/e50fe7b1-3963-440e-ae27-3ec6e3b12601)
+--- | --- | 
+
+
+
+
 <br>
 
 ### [목차로 돌아가기](#main)
