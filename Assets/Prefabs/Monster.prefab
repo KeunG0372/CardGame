@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2862568842266647652}
   - component: {fileID: 8783788746934469116}
   - component: {fileID: 4851089138128435052}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Monster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ MonoBehaviour:
   monsterName: 
   msHealth: 0
   msGuard: 0
-  msHealthText: {fileID: 0}
+  attackDamage: 0
 --- !u!212 &8783788746934469116
 SpriteRenderer:
   m_ObjectHideFlags: 0

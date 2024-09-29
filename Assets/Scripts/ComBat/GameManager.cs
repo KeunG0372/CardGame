@@ -9,9 +9,11 @@ public class GameManager : MonoBehaviour
     private void Awake() => Inst = this;
 
     [SerializeField] NotificationPanel notificationPanel;
-    [SerializeField] Text msText;
-    [SerializeField] Text plText;
-    
+    [SerializeField] Text msHpText;
+    [SerializeField] Text msGpText;
+    [SerializeField] Text plHpText;
+    [SerializeField] Text plGpText;
+
     public PlayerController Player; // 플레이어 참조 추가
 
     [SerializeField] public int money;
@@ -28,7 +30,8 @@ public class GameManager : MonoBehaviour
 #if UNITY_EDITOR
         InputCheatkey();
 #endif
-        plText.text = Player.pHealth.ToString();
+        plHpText.text = Player.pHealth.ToString();
+        plGpText.text = Player.pGuard.ToString();
     }
 
     public void CheckAndAttackMonster(Card card)
@@ -46,8 +49,10 @@ public class GameManager : MonoBehaviour
     public void UseCard(Card card, Monster monster)
     {
         monster.TakeDamage(card.damage);
+        Player.IncreaseGuard(card.guard);
         CardManager.Inst.RemoveCard(card);
-        msText.text = monster.msHealth.ToString();
+        msHpText.text = monster.msHealth.ToString();
+        msGpText.text = monster.msGuard.ToString();
     }
 
     void InputCheatkey()

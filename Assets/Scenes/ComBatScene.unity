@@ -576,8 +576,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   notificationPanel: {fileID: 997436802}
-  msText: {fileID: 2067683991}
-  plText: {fileID: 1228839741}
+  msHpText: {fileID: 2067683991}
+  msGpText: {fileID: 1268233684}
+  plHpText: {fileID: 1228839741}
+  plGpText: {fileID: 1027984163}
   Player: {fileID: 169764127}
   money: 0
 --- !u!1 &997436798
@@ -914,6 +916,8 @@ MonoBehaviour:
   monsterPrefab: {fileID: 525139634238584367, guid: ca591f4f192b8c74ba674fde5670708b, type: 3}
   spawnPoints:
   - {fileID: 804535439}
+  msHpText: {fileID: 2067683991}
+  msGpText: {fileID: 1268233684}
 --- !u!4 &1085159727
 Transform:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MonsterManager : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class MonsterManager : MonoBehaviour
     [SerializeField] MsSO msSO;
     [SerializeField] GameObject monsterPrefab;
     [SerializeField] Transform[] spawnPoints;
+
+    [SerializeField] Text msHpText;
+    [SerializeField] Text msGpText;
 
     List<Monster> activeMonsters = new List<Monster>();
 
@@ -25,6 +29,8 @@ public class MonsterManager : MonoBehaviour
         var monster = monsterObject.GetComponent<Monster>();
         monster.Setup(monsterInfo);
         activeMonsters.Add(monster);
+        msHpText.text = monster.msHealth.ToString();
+        msGpText.text = monster.msGuard.ToString();
     }
 
     public void RemoveMonster(Monster monster)
