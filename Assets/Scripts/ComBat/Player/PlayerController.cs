@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     public void IncreaseGuard(int guardValue)
     {
         pGuard += guardValue;
-        Debug.Log("가드증가 " + guardValue + ". 총 가드: " + pGuard);
+        //Debug.Log("가드증가 " + guardValue + ". 총 가드: " + pGuard);
     }
 
     void Die()

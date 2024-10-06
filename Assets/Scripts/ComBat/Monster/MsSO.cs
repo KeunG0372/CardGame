@@ -9,7 +9,7 @@ public class MonsterInfo
     public int msHealth;
     public int msGuard;
     public int msDamage;
-    //public Sprite sprite; //이미지 아직 없음
+    public Sprite sprite;
     public int index;
 }
 

@@ -15,6 +15,7 @@ public class MonsterManager : MonoBehaviour
 
     [SerializeField] Text msHpText;
     [SerializeField] Text msGpText;
+    [SerializeField] Text msAtkText;
 
     List<Monster> activeMonsters = new List<Monster>();
 
@@ -29,8 +30,9 @@ public class MonsterManager : MonoBehaviour
         var monster = monsterObject.GetComponent<Monster>();
         monster.Setup(monsterInfo);
         activeMonsters.Add(monster);
-        msHpText.text = monster.msHealth.ToString();
-        msGpText.text = monster.msGuard.ToString();
+        msHpText.text = "HP  " + monster.msHealth.ToString();
+        msGpText.text = "GP  " + monster.msGuard.ToString();
+        msAtkText.text = "Atk  " + monster.attackDamage.ToString();
     }
 
     public void RemoveMonster(Monster monster)

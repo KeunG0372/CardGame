@@ -71,7 +71,7 @@ public class TurnManager : MonoBehaviour
         isLoading = true;
 
         if (myTurn)
-            GameManager.Inst.Notification("나의 턴");
+            GameManager.Inst.Notification("My Turn");
 
         yield return delay;
         //OnAddCard?.Invoke(myTurn);    //시작때마다 카드주기 어떻게 할지 구상중 
@@ -86,7 +86,7 @@ public class TurnManager : MonoBehaviour
             myTurn = false;
             StartCoroutine(EnemyTurnCo());
 
-            GameManager.Inst.Notification("적의 턴");
+            GameManager.Inst.Notification("Enemy Turn");
         }
     }
 

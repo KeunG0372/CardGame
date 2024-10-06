@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Text msGpText;
     [SerializeField] Text plHpText;
     [SerializeField] Text plGpText;
+    [SerializeField] Text msAtkText;
 
     public PlayerController Player; // 플레이어 참조 추가
 
@@ -30,8 +31,8 @@ public class GameManager : MonoBehaviour
 #if UNITY_EDITOR
         InputCheatkey();
 #endif
-        plHpText.text = Player.pHealth.ToString();
-        plGpText.text = Player.pGuard.ToString();
+        plHpText.text = "HP  " + Player.pHealth.ToString();
+        plGpText.text = "GP  " + Player.pGuard.ToString();
     }
 
     public void CheckAndAttackMonster(Card card)
@@ -49,10 +50,10 @@ public class GameManager : MonoBehaviour
     public void UseCard(Card card, Monster monster)
     {
         monster.TakeDamage(card.damage);
-        Player.IncreaseGuard(card.guard);
         CardManager.Inst.RemoveCard(card);
-        msHpText.text = monster.msHealth.ToString();
-        msGpText.text = monster.msGuard.ToString();
+        msHpText.text = "HP  " + monster.msHealth.ToString();
+        msGpText.text = "GP  " + monster.msGuard.ToString();
+        msAtkText.text = "Atk  " + monster.attackDamage.ToString();
     }
 
     void InputCheatkey()

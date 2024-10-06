@@ -9,6 +9,7 @@ public class Monster : MonoBehaviour
     public int msHealth;
     public int msGuard;
     public int attackDamage;
+    public Sprite sprite;
 
     public void Setup(MonsterInfo info)
     {
@@ -16,7 +17,9 @@ public class Monster : MonoBehaviour
         msHealth = info.msHealth;
         msGuard = info.msGuard;
         attackDamage = info.msDamage;
-        // sprite = info.sprite; // 만약 스프라이트가 추가되면 사용
+
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = info.sprite;
     }
 
     public void TakeDamage(int damage)
