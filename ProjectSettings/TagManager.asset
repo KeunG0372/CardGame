@@ -11,6 +11,7 @@ TagManager:
   - Shop
   - Inn
   - BossBattle
+  - Monster
   layers:
   - Default
   - TransparentFX

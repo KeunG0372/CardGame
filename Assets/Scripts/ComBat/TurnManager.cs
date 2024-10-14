@@ -26,12 +26,17 @@ public class TurnManager : MonoBehaviour
 
     public static Action<bool> OnAddCard;
 
+    GameObject playerObject;
+
     private void Start()
     {
         GameSetUp();
         StartCoroutine(StartGameCo());
 
         turnEndBtn.onClick.AddListener(EndTurn);
+
+        playerObject = GameObject.Find("Player");
+
     }
 
     private void Update()
@@ -86,22 +91,30 @@ public class TurnManager : MonoBehaviour
             myTurn = false;
             StartCoroutine(EnemyTurnCo());
 
+            GameManager.Inst.EndBuff();
+
             GameManager.Inst.Notification("Enemy Turn");
         }
     }
 
     IEnumerator EnemyTurnCo()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
 
         foreach (var monster in MonsterManager.Inst.GetActiveMonsters())
         {
             GameManager.Inst.Player.TakeDamage(monster.attackDamage);
+
+            monster.Attack(playerObject.transform.position);
+
+            yield return new WaitForSeconds(0.5f);
+
+
         }
 
         CardManager.Inst.MoveAllCardsToGraveyard();
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         myTurn = true;
         StartCoroutine(StartGameCo());

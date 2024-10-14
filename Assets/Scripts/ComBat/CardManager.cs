@@ -222,6 +222,7 @@ public class CardManager : MonoBehaviour
             if (!onCardArea)
             {
                 GameManager.Inst.Player.IncreaseGuard(selectCard.cardInfo.guard);
+                GameManager.Inst.IncreaseBuff(selectCard);
                 RemoveCard(selectCard);
             }
         }
@@ -248,6 +249,7 @@ public class CardManager : MonoBehaviour
                 if (monster != null)
                 {
                     GameManager.Inst.Player.IncreaseGuard(selectCard.cardInfo.guard);
+                    GameManager.Inst.IncreaseBuff(selectCard);
                     GameManager.Inst.UseCard(selectCard, monster);
 
                     break;

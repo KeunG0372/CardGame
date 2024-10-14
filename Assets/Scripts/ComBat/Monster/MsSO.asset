@@ -17,5 +17,5 @@ MonoBehaviour:
     msHealth: 20
     msGuard: 2
     msDamage: 3
-    sprite: {fileID: 21300000, guid: 5bc6756af742b234d8e0e70d9ad59aa9, type: 3}
+    sprite: {fileID: 21300000, guid: 6daac4e72b8aa534f8ffef07a30d4e5a, type: 3}
     index: 0

@@ -8,6 +8,7 @@ public class CardInfo
     public string name;     //카드이름
     public int damage;      //공격력
     public int guard;       //가드
+    public int buff;        //공격력 증가
     //public Sprite sprite; //이미지 아직 없음
     public float percent;   //등장확률
     public string info;     //카드정보텍스트(설명)

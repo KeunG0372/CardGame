@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,14 @@ public class Monster : MonoBehaviour
     public int msGuard;
     public int attackDamage;
     public Sprite sprite;
+
+    GameObject monsterObject;
+    [SerializeField] float duration = 0.2f;
+
+    private void Start()
+    {
+        monsterObject = this.gameObject;
+    }
 
     public void Setup(MonsterInfo info)
     {
@@ -54,5 +63,26 @@ public class Monster : MonoBehaviour
     {
         // 몬스터 사망 처리 로직
         MonsterManager.Inst.RemoveMonster(this);
+    }
+
+    public void Attack(Vector3 playerPosition)
+    {
+        StartCoroutine(PerformAttack(playerPosition));
+    }
+
+    private IEnumerator PerformAttack(Vector3 playerPosition)
+    {
+
+        Vector3 originalPosition = transform.position;
+
+        // 몬스터를 플레이어 방향으로 이동
+        Vector3 targetPosition = Vector3.Lerp(originalPosition, playerPosition, 0.15f);
+        transform.DOMove(targetPosition, duration);
+        yield return new WaitForSeconds(duration);
+
+        // 원래 위치로 이동
+        transform.DOMove(originalPosition, duration);
+        yield return new WaitForSeconds(duration);
+
     }
 }

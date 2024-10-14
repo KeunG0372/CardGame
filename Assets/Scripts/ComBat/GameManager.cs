@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
 
     bool isMonsterTarget;
 
+    [SerializeField] int buffDamage = 0;
+    [SerializeField] int totalDamage;
+
 
     private void Start()
     {
@@ -35,26 +38,36 @@ public class GameManager : MonoBehaviour
         plGpText.text = "GP  " + Player.pGuard.ToString();
     }
 
-    public void CheckAndAttackMonster(Card card)
-    {
-        foreach (var monster in MonsterManager.Inst.GetActiveMonsters())
-        {
-            if (card.GetComponent<Collider2D>().IsTouching(monster.GetComponent<Collider2D>()))
-            {
-                UseCard(card, monster);
-                break; // 한 번만 공격하도록 루프 종료
-            }
-        }
-    }
-
     public void UseCard(Card card, Monster monster)
     {
-        monster.TakeDamage(card.damage);
+
+        monster.TakeDamage(totalDamage);
         CardManager.Inst.RemoveCard(card);
         msHpText.text = "HP  " + monster.msHealth.ToString();
         msGpText.text = "GP  " + monster.msGuard.ToString();
         msAtkText.text = "Atk  " + monster.attackDamage.ToString();
+
+        if (card.isAttack)
+        {
+            Player.Attack(monster.transform.position);
+        }
+
     }
+
+    public void IncreaseBuff(Card card)
+    {
+        buffDamage += card.buff;
+
+        totalDamage = card.damage + buffDamage;
+    }
+
+    public void EndBuff()
+    {
+        buffDamage = 0;
+        totalDamage = 0;
+    }
+
+
 
     void InputCheatkey()
     {

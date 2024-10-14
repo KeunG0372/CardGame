@@ -13,43 +13,57 @@ MonoBehaviour:
   m_Name: CardSO
   m_EditorClassIdentifier: 
   cards:
-  - name: 1
+  - name: atk1
     damage: 1
     guard: 0
+    buff: 0
     percent: 10
-    info: 1 Damage
+    info: Damage 1
     isAttack: 1
     index: 1
     pHave: 1
-  - name: 2
+  - name: atk2
     damage: 2
     guard: 0
+    buff: 0
     percent: 10
-    info: 2 Damage
+    info: Damage 2
     isAttack: 1
     index: 2
     pHave: 1
-  - name: 3
+  - name: atk3
     damage: 3
     guard: 1
+    buff: 0
     percent: 10
-    info: 3 Damage 1 Guard
+    info: Damage 3 Guard +1
     isAttack: 1
     index: 3
     pHave: 1
-  - name: 4
+  - name: atk4
     damage: 4
     guard: 2
+    buff: 0
     percent: 10
-    info: 4 Damage 2 Guard
+    info: Damage 4 Guard +2
     isAttack: 1
     index: 4
     pHave: 1
-  - name: guard 1
+  - name: guard1
     damage: 0
     guard: 2
+    buff: 0
     percent: 10
-    info: 2 Guard
+    info: Guard 2
     isAttack: 0
     index: 5
+    pHave: 1
+  - name: buff1
+    damage: 0
+    guard: 0
+    buff: 2
+    percent: 10
+    info: All Damage +2
+    isAttack: 0
+    index: 6
     pHave: 1

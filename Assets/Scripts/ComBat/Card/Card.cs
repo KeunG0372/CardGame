@@ -16,6 +16,8 @@ public class Card : MonoBehaviour
 
     public int damage;
     public int guard;
+    public int buff;
+    public bool isAttack;
 
 
     public void Setup(CardInfo cardInfo)
@@ -28,6 +30,8 @@ public class Card : MonoBehaviour
 
         damage = this.cardInfo.damage;
         guard = this.cardInfo.guard;
+        isAttack = this.cardInfo.isAttack;
+        buff = this.cardInfo.buff;
     }
 
     private void OnMouseOver()
