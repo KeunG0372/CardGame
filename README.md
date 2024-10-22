@@ -14,6 +14,8 @@
 - [3주차](#14-3)
 - [4주차](#14-4)
 - [5주차](#14-5)
+- [6주차](#14-6)
+- [7주차](#14-7)
 
 ---
 <br><br>
@@ -199,6 +201,28 @@
 
 ![스크린샷 2024-10-14 215032](https://github.com/user-attachments/assets/5762ad2f-8e12-4ba9-bf12-5f84c40fd1e7) |![스크린샷 2024-10-14 215046](https://github.com/user-attachments/assets/5195faad-0c94-4ba3-a56f-fb736dda6ebd)
 --- | --- | 
+
+
+<br>
+
+## [7주차] <a name='14-7'> </a>
+
+<br>
+
+1. 구현
+- 플레이어
++ 일단 검은 구체로 대체
+- 시스템
++ 시작 시 맵 타일들이 4가지 다른 색으로 랜덤으로 배치 ( 이벤트를 랜덤으로 뜨게 할 생각 )
++ 맵 자체는 여관, 전투, 상점, 이벤트 로 나눌 예정
++ 주사위 Roll 버튼을 누를 시 캔버스에 랜덤으로 번호가 뜨며 그 위치로 이동
++ 빨간색 이벤트에 도착 할 시 전투씬 전환
+
+![스크린샷 2024-10-23 001621](https://github.com/user-attachments/assets/fc976780-d470-4d13-a994-0b475f6f0df5) |![스크린샷 2024-10-23 001228](https://github.com/user-attachments/assets/9a2f5173-7164-43ae-88ff-b10163efd836) |![스크린샷 2024-10-23 001216](https://github.com/user-attachments/assets/8563e1b4-4fb9-455a-bc89-4e7a9a71a108)
+--- | --- | --- | 
+
+
+
 
 
 <br>
