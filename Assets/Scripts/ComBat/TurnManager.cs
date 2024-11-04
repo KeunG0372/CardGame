@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TurnManager : MonoBehaviour
 {
@@ -89,11 +90,19 @@ public class TurnManager : MonoBehaviour
         if (myTurn)
         {
             myTurn = false;
-            StartCoroutine(EnemyTurnCo());
 
-            GameManager.Inst.EndBuff();
+            // 남은 몬스터가 있는지 확인 후 적 턴으로 넘어가거나 씬 이동
+            if (MonsterManager.Inst.GetActiveMonsters().Count > 0)
+            {
+                StartCoroutine(EnemyTurnCo());
+                GameManager.Inst.Notification("Enemy Turn");
+            }
+            else
+            {
+                StartCoroutine(SceneMove());  // 모든 몬스터가 처치된 경우 씬 이동
 
-            GameManager.Inst.Notification("Enemy Turn");
+                GameManager.Inst.Notification("VicTory!");
+            }
         }
     }
 
@@ -118,6 +127,12 @@ public class TurnManager : MonoBehaviour
 
         myTurn = true;
         StartCoroutine(StartGameCo());
+    }
+
+    private IEnumerator SceneMove()
+    {
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("MovingScene");
     }
 
 }

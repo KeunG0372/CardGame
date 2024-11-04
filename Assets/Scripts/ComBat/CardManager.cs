@@ -9,8 +9,11 @@ using Random = UnityEngine.Random;
 public class CardManager : MonoBehaviour
 {
     public static CardManager Inst { get; private set; }
+    [SerializeField] private List<Card> activeCards = new List<Card>();  //활성화 카드 관리
 
     void Awake() => Inst = this;
+
+    
 
     [SerializeField] CardSO cardSO;
     [SerializeField] GameObject cardPrefab;
@@ -27,6 +30,32 @@ public class CardManager : MonoBehaviour
     bool onCardArea;
     enum ECardState { Nothing, CanMouseOver, CanMouseDrag }
 
+    public void RegisterCard(Card card)
+    {
+        if (!activeCards.Contains(card))
+        {
+            activeCards.Add(card);
+        }
+    }
+
+    public void UnregisterCard(Card card)
+    {
+        if (activeCards.Contains(card))
+        {
+            activeCards.Remove(card);
+        }
+    }
+
+    public void ApplyBuffToAllCards(int buffIncrease)
+    {
+        foreach (var card in activeCards)
+        {
+            if (card.cardInfo.isAttack)
+            {
+                card.IncreaseDamage(buffIncrease);
+            }
+        }
+    }
 
     public CardInfo PopCard()
     {
@@ -221,8 +250,8 @@ public class CardManager : MonoBehaviour
         {
             if (!onCardArea)
             {
+                GameManager.Inst.ApplyBuffToAllCards(selectCard.cardInfo.buff);
                 GameManager.Inst.Player.IncreaseGuard(selectCard.cardInfo.guard);
-                GameManager.Inst.IncreaseBuff(selectCard);
                 RemoveCard(selectCard);
             }
         }
@@ -248,8 +277,11 @@ public class CardManager : MonoBehaviour
                 Monster monster = hit.collider.GetComponent<Monster>();
                 if (monster != null)
                 {
+                    if (selectCard.cardInfo.info.Contains("buff"))
+                    {
+                        GameManager.Inst.ApplyBuffToAllCards(selectCard.cardInfo.buff);
+                    }
                     GameManager.Inst.Player.IncreaseGuard(selectCard.cardInfo.guard);
-                    GameManager.Inst.IncreaseBuff(selectCard);
                     GameManager.Inst.UseCard(selectCard, monster);
 
                     break;

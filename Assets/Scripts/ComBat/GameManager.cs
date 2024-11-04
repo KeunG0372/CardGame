@@ -21,8 +21,7 @@ public class GameManager : MonoBehaviour
 
     bool isMonsterTarget;
 
-    [SerializeField] int buffDamage = 0;
-    [SerializeField] int totalDamage;
+    [SerializeField] public int pendingBuffDamage = 0;
 
 
     private void Start()
@@ -38,35 +37,34 @@ public class GameManager : MonoBehaviour
         plGpText.text = "GP  " + Player.pGuard.ToString();
     }
 
+
     public void UseCard(Card card, Monster monster)
     {
-
-        monster.TakeDamage(totalDamage);
-        CardManager.Inst.RemoveCard(card);
-        msHpText.text = "HP  " + monster.msHealth.ToString();
-        msGpText.text = "GP  " + monster.msGuard.ToString();
-        msAtkText.text = "Atk  " + monster.attackDamage.ToString();
-
-        if (card.isAttack)
+        if (card.cardInfo.isAttack)
         {
+            int totalDamage = card.CurrentDamage;
+            totalDamage -= card.CurrentBuff;    // 버프 데미지가 계속 포함되는 버그로 포함시킴
+            monster.TakeDamage(totalDamage);
+
+            msHpText.text = "HP  " + monster.msHealth.ToString();
+            msGpText.text = "GP  " + monster.msGuard.ToString();
+            msAtkText.text = "Atk  " + monster.attackDamage.ToString();
+
             Player.Attack(monster.transform.position);
         }
 
+        if (card.cardInfo.isBuff)
+        {
+            pendingBuffDamage += card.CurrentBuff;
+        }
+
+        CardManager.Inst.RemoveCard(card);
     }
 
-    public void IncreaseBuff(Card card)
+    public void ApplyBuffToAllCards(int buffIncrease)
     {
-        buffDamage += card.buff;
-
-        totalDamage = card.damage + buffDamage;
+        CardManager.Inst.ApplyBuffToAllCards(buffIncrease);
     }
-
-    public void EndBuff()
-    {
-        buffDamage = 0;
-        totalDamage = 0;
-    }
-
 
 
     void InputCheatkey()

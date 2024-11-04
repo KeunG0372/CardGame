@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Monster : MonoBehaviour
@@ -61,8 +62,10 @@ public class Monster : MonoBehaviour
 
     void Die()
     {
-        // 몬스터 사망 처리 로직
         MonsterManager.Inst.RemoveMonster(this);
+
+        TurnManager.Inst.EndTurn();
+
     }
 
     public void Attack(Vector3 playerPosition)

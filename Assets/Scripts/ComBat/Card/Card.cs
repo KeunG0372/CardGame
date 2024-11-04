@@ -12,26 +12,95 @@ public class Card : MonoBehaviour
     [SerializeField] TextMeshPro damageTxt;
 
     public CardInfo cardInfo;
+
+    public int CurrentDamage => currentDamage;
+    public int CurrentGuard => currentGuard;
+    public int CurrentBuff => currentBuff;
+
+    private int currentDamage;
+    private int currentGuard;
+    private int currentBuff;
     public PRS originPRS;
 
-    public int damage;
-    public int guard;
-    public int buff;
+    //public int damage;
+    //public int guard;
+    //public int buff;
     public bool isAttack;
 
+    private void Start()
+    {
+        // 카드가 생성될 때 CardManager에 등록
+        CardManager.Inst.RegisterCard(this);
+    }
+
+    private void OnDestroy()
+    {
+        // 카드가 파괴될 때 CardManager에서 해제
+        CardManager.Inst.UnregisterCard(this);
+    }
+
+    public void UpdateInfoText()
+    {
+        string displayText = "";
+
+        if (cardInfo.info.Contains("damage"))
+        {
+            displayText += $"Damage {currentDamage} ";
+        }
+        if (cardInfo.info.Contains("guard"))
+        {
+            displayText += $"Guard {currentGuard} ";
+        }
+        if (cardInfo.info.Contains("buff"))
+        {
+            displayText += $"Buff {currentBuff} ";
+        }
+
+        infoTxt.text = displayText.Trim();
+    }
+
+    public void UpdateValues(int damageIncrease, int guardIncrease, int buffIncrease)
+    {
+        if (cardInfo.info.Contains("damage"))
+        {
+            currentDamage += damageIncrease;
+        }
+        if (cardInfo.info.Contains("guard"))
+        {
+            currentGuard += guardIncrease;
+        }
+        if (cardInfo.info.Contains("buff"))
+        {
+            currentBuff += buffIncrease;
+        }
+
+        UpdateInfoText();
+    }
+
+    public void IncreaseDamage(int amount)
+    {
+        currentDamage += amount;
+        UpdateInfoText();
+    }
 
     public void Setup(CardInfo cardInfo)
     {
+        //image.sprite = this.cardInfo.sprite;                //임시 아직 어차피 아무것도 없음
+        //infoTxt.text = this.cardInfo.info;                  //카드 정보 텍스트로 불러오기
+        //damageTxt.text = this.cardInfo.damage.ToString();   //데미지 텍스트로 불러오기
+        //damage = this.cardInfo.damage;
+        //guard = this.cardInfo.guard;
+        //buff = this.cardInfo.buff;
+
         this.cardInfo = cardInfo;
 
-        //image.sprite = this.cardInfo.sprite;                //임시 아직 어차피 아무것도 없음
-        infoTxt.text = this.cardInfo.info;                  //카드 정보 텍스트로 불러오기
-        damageTxt.text = this.cardInfo.damage.ToString();   //데미지 텍스트로 불러오기
-
-        damage = this.cardInfo.damage;
-        guard = this.cardInfo.guard;
         isAttack = this.cardInfo.isAttack;
-        buff = this.cardInfo.buff;
+
+        currentDamage = cardInfo.damage;
+        currentGuard = cardInfo.guard;
+        currentBuff = cardInfo.buff;
+
+        UpdateInfoText();
     }
 
     private void OnMouseOver()

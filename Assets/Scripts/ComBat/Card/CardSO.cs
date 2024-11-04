@@ -13,6 +13,7 @@ public class CardInfo
     public float percent;   //등장확률
     public string info;     //카드정보텍스트(설명)
     public bool isAttack;   //공격카드인지
+    public bool isBuff;     //버프카드인지
     public int index;       //카드 인덱스 번호
     public bool pHave;      //플레이어가 가지고 있는지 (사용할 수 있는지)
 }
