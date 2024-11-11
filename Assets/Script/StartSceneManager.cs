@@ -5,20 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class StartSceneManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public DataManager dataManager;
+    public Vector3 initialPosition = new Vector3(-6, 0, -1);
 
     public void StartGameing()
     {
+        dataManager.ResetGameData(initialPosition);
+
         SceneManager.LoadScene("MovingScene");
     }
 

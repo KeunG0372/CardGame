@@ -5,46 +5,45 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
-    //이건 상점 UI
+    // 상점 및 휴식지 UI
     public GameObject ShopUI;
-
-    //이건 휴식지 UI
     public GameObject InnUI;
 
+    private MapSceneController mapSceneController;
 
-    // Start is called before the first frame update
+    private HashSet<GameObject> collidedTiles = new HashSet<GameObject>();
+
+
     void Start()
+    // Start is called before the first frame update
     {
         ShopUI.SetActive(false);
         InnUI.SetActive(false);
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        /*
-        if(DiceRoll.isroll == true)
+        mapSceneController = FindObjectOfType<MapSceneController>();
+        if (mapSceneController == null)
         {
-            PlayerMoving();
-        }*/
+            Debug.LogError("MapSceneController가 씬에 없음.");
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "noGoZone")
+        if (collision.tag == "noGoZone")
         {
-            //Debug.Log("나 닿음");
-            transform.position = new Vector3(6.0f,0,0);
+            transform.position = new Vector3(6.0f, 0, 0);
         }
 
-        else if(collision.tag == "Battle")
+        else if (collision.tag == "Battle")
         {
-            SceneManager.LoadScene("ComBatScene");
-            Debug.Log("나 닿음");
+            if (mapSceneController != null)
+            {
+                mapSceneController.DisableBattleTile(collision.transform.position);
+                mapSceneController.GoToCombatScene();
+            }
         }
 
-        else if(collision.tag == "Shop")
+        else if (collision.tag == "Shop")
         {
             ShopUI.SetActive(true);
         }
@@ -66,7 +65,10 @@ public class PlayerMove : MonoBehaviour
 
         else if (collision.tag == "BossBattle")
         {
-            SceneManager.LoadScene("ComBatScene");
+            if (mapSceneController != null)
+            {
+                mapSceneController.GoToCombatScene();
+            }
         }
     }
 }

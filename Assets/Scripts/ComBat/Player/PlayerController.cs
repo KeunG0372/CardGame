@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] public int pMaxHealth = 20;
     [SerializeField] public int pHealth = 20;
     [SerializeField] public int pGuard = 2;
 
@@ -17,6 +18,12 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         playerObject = this.gameObject;
+
+        pMaxHealth = PlayerPrefs.GetInt("PlayerMaxHealth", pMaxHealth);
+        pHealth = PlayerPrefs.GetInt("PlayerHealth", pHealth);
+        pGuard = PlayerPrefs.GetInt("PlayerGuard", pGuard);
+
+        pHealth = Mathf.Min(pHealth, pMaxHealth);
     }
 
     public void TakeDamage(int damage)
@@ -41,16 +48,29 @@ public class PlayerController : MonoBehaviour
             pHealth -= damage;
         }
 
+        if (pHealth > pMaxHealth) pHealth = pMaxHealth;
+
         if (pHealth <= 0)
         {
             Die();
         }
+
+        SavePlayerStats();
     }
 
     public void IncreaseGuard(int guardValue)
     {
         pGuard += guardValue;
         //Debug.Log("가드증가 " + guardValue + ". 총 가드: " + pGuard);
+        SavePlayerStats();
+    }
+
+    public void IncreaseHealth(int healthValue)
+    {
+        pHealth += healthValue;
+        if (pHealth > pMaxHealth) pHealth = pMaxHealth;  // MaxHealth를 넘지 않도록
+
+        SavePlayerStats();  // 체력 변경 시 저장
     }
 
     void Die()
@@ -85,4 +105,18 @@ public class PlayerController : MonoBehaviour
 
         isAttacking = false;
     }
+
+    private void SavePlayerStats()
+    {
+        PlayerPrefs.SetInt("PlayerMaxHealth", pMaxHealth);
+        PlayerPrefs.SetInt("PlayerHealth", pHealth);
+        PlayerPrefs.SetInt("PlayerGuard", pGuard);
+        PlayerPrefs.Save();
+    }
+
+    private void OnApplicationQuit()
+    {
+        SavePlayerStats();  // 게임 종료 시 데이터 저장
+    }
+
 }
