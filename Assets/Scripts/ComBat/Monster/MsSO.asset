@@ -19,3 +19,9 @@ MonoBehaviour:
     msDamage: 3
     sprite: {fileID: 21300000, guid: 6daac4e72b8aa534f8ffef07a30d4e5a, type: 3}
     index: 0
+  - name: Boss
+    msHealth: 30
+    msGuard: 2
+    msDamage: 5
+    sprite: {fileID: 21300000, guid: 6daac4e72b8aa534f8ffef07a30d4e5a, type: 3}
+    index: 1

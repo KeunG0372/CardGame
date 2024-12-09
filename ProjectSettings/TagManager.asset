@@ -12,6 +12,7 @@ TagManager:
   - Inn
   - BossBattle
   - Monster
+  - Random
   layers:
   - Default
   - TransparentFX

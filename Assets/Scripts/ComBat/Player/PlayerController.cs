@@ -9,21 +9,34 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public int pMaxHealth = 20;
     [SerializeField] public int pHealth = 20;
     [SerializeField] public int pGuard = 2;
+    [SerializeField] public static int pKarma = 0;
+
+    public static bool karma = false;
 
     private bool isAttacking = false;
     [SerializeField] private float duration = 0.2f;
 
     GameObject playerObject;
 
+    public static int plGold = 100;
+
     private void Start()
     {
         playerObject = this.gameObject;
 
-        pMaxHealth = PlayerPrefs.GetInt("PlayerMaxHealth", pMaxHealth);
-        pHealth = PlayerPrefs.GetInt("PlayerHealth", pHealth);
-        pGuard = PlayerPrefs.GetInt("PlayerGuard", pGuard);
+        GameData data = FindObjectOfType<DataManager>().LoadGameData();
 
-        pHealth = Mathf.Min(pHealth, pMaxHealth);
+        if (data != null)
+        {
+            // 플레이어 상태를 저장된 값으로 복원
+            pMaxHealth = data.playerMaxHP;
+            pHealth = data.playerHP;
+            pGuard = data.playerGP;
+            pKarma = data.playerKarma;
+
+            // 체력을 최대 체력 값으로 제한
+            pHealth = Mathf.Min(pHealth, pMaxHealth);
+        }
     }
 
     public void TakeDamage(int damage)
@@ -77,7 +90,6 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Player is dead!");
         SceneManager.LoadScene("DeadScene");
-        // 게임 오버 처리 등을 여기에 추가
     }
 
     public void Attack(Vector3 monsterPosition)
@@ -108,10 +120,9 @@ public class PlayerController : MonoBehaviour
 
     private void SavePlayerStats()
     {
-        PlayerPrefs.SetInt("PlayerMaxHealth", pMaxHealth);
-        PlayerPrefs.SetInt("PlayerHealth", pHealth);
-        PlayerPrefs.SetInt("PlayerGuard", pGuard);
-        PlayerPrefs.Save();
+        // 현재 상태를 데이터 매니저를 통해 저장
+        DataManager dataManager = FindObjectOfType<DataManager>();
+        dataManager.SaveGameData(null, null, pHealth, pGuard, pKarma, null, null, null, false);
     }
 
     private void OnApplicationQuit()
@@ -119,4 +130,40 @@ public class PlayerController : MonoBehaviour
         SavePlayerStats();  // 게임 종료 시 데이터 저장
     }
 
+    public void OnToggleChanged(bool value)
+    {
+        karma = value;
+        Debug.Log($"Bool is now: {karma}");
+    }
+
+    public void KarmaEvent()
+    {
+        if (karma)
+        {
+            pKarma += 1;
+        }
+        else
+        {
+            pKarma -= 1;
+        }
+
+        SavePlayerStats();
+    }
+
+    public void KarmaEnd()
+    {
+        SavePlayerStats();
+        Debug.Log(pKarma);
+        SceneManager.LoadScene("MovingScene");
+    }
+
+    public void RetryBtn()
+    {
+        SceneManager.LoadScene("IntroScene");
+    }
+
+    public void QuitBtn()
+    {
+        Application.Quit();
+    }
 }

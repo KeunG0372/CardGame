@@ -99,11 +99,25 @@ public class TurnManager : MonoBehaviour
             }
             else
             {
-                StartCoroutine(SceneMove());  // 모든 몬스터가 처치된 경우 씬 이동
-
                 GameManager.Inst.Notification("VicTory!");
+
+                if (!MapSceneController.isBoss)
+                    StartCoroutine(SceneMove());  // 모든 몬스터가 처치된 경우 씬 이동
+                else
+                    StartCoroutine(EndingScene());
             }
         }
+    }
+
+    public void GameEnd()
+    {
+        StartCoroutine(SceneMove());
+    }
+
+    private IEnumerator EndingScene()
+    {
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("EndingScene");
     }
 
     IEnumerator EnemyTurnCo()
@@ -131,6 +145,11 @@ public class TurnManager : MonoBehaviour
 
     private IEnumerator SceneMove()
     {
+        DataManager dataManager = FindObjectOfType<DataManager>();
+        MapSceneController mapSceneController = FindObjectOfType<MapSceneController>();
+
+        mapSceneController?.SaveGame();
+
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("MovingScene");
     }

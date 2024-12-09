@@ -14,14 +14,14 @@ public class DiceGo : MonoBehaviour
 
     public Vector3 initialPosition = new Vector3(0, 0, 0);
 
+    private DataManager dataManager;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        ResetPlayerPosition();
-
-        //playerMoves.transform.position = initialPosition;
-
+        dataManager = FindObjectOfType<DataManager>();
+        LoadPlayerPosition();
     }
 
     // Update is called once per frame
@@ -35,7 +35,7 @@ public class DiceGo : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
 
-        numbers = Random.RandomRange(1, 7);
+        numbers = Random.Range(1, 7);
         if (DiceRoll.isroll == true)
         {
             goNumb = numbers;
@@ -77,20 +77,25 @@ public class DiceGo : MonoBehaviour
         SavePlayerPosition();
     }
 
-    void ResetPlayerPosition()
+    void LoadPlayerPosition()
     {
-        PlayerPrefs.DeleteKey("PlayerX");
-        PlayerPrefs.DeleteKey("PlayerY");
-        PlayerPrefs.DeleteKey("PlayerZ");
-        PlayerPrefs.Save();
+        GameData data = dataManager.LoadGameData(); // DataManager에서 데이터 불러오기
+        if (data != null && data.playerPosition != Vector3.zero)
+        {
+            playerMoves.transform.position = data.playerPosition;
+        }
+        else
+        {
+            playerMoves.transform.position = initialPosition;
+        }
     }
 
     void SavePlayerPosition()
     {
-        PlayerPrefs.SetFloat("PlayerX", playerMoves.transform.position.x);
-        PlayerPrefs.SetFloat("PlayerY", playerMoves.transform.position.y);
-        PlayerPrefs.SetFloat("PlayerZ", playerMoves.transform.position.z);
-        PlayerPrefs.Save();
+        MapSceneController mapSceneController = FindObjectOfType<MapSceneController>();
+
+        Vector3 playerPosition = playerMoves.transform.position;
+        mapSceneController?.SaveGame();
     }
 
 }

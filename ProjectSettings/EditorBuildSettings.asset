@@ -14,6 +14,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ComBatScene.unity
     guid: c2b33265b2b65fe4a84c32b206170104
+  - enabled: 1
+    path: Assets/Scenes/DeadScene.unity
+    guid: 90ad6ff01984f7b48a2051cca6f966d8
+  - enabled: 1
+    path: Assets/Scenes/KarmaScene.unity
+    guid: 0cb54411faca09248a620a06b0ee2dc0
+  - enabled: 1
+    path: Assets/Scenes/EndingScene.unity
+    guid: 994863ca397bde140a419e5810239f7f
   - enabled: 0
     path: Assets/Scenes/Shop.unity
     guid: 9fd8ae572f04a2c409a4522edcf0aa84
@@ -23,9 +32,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Karma bad talk.unity
     guid: 34caeece938121e4c95c552ffeefeee5
-  - enabled: 1
-    path: Assets/Scenes/DeadScene.unity
-    guid: 90ad6ff01984f7b48a2051cca6f966d8
   - enabled: 0
     path: Assets/Scenes/Karma kind Ed.unity
     guid: 12a6b0c3df410e84f9695530781f261f

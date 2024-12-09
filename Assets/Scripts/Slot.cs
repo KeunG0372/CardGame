@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Slot : MonoBehaviour
 {
@@ -11,11 +12,11 @@ public class Slot : MonoBehaviour
 
     private void Awake()
     {
-        SetSellBInteractable(false);       
+        SetSellBInteractable(false);
     }
     void SetSellBInteractable(bool b)
     {
-        if(sellB != null)
+        if (sellB != null)
         {
             sellB.interactable = b;
         }
@@ -26,19 +27,34 @@ public class Slot : MonoBehaviour
         if (item == null)
         {
             image.enabled = false;
-            SetSellBInteractable(false );
-            gameObject.name="Empty";
+            image.color = new Color(1, 1, 1, 0);
+            SetSellBInteractable(false);
+            gameObject.name = "Empty";
         }
         else
         {
             image.enabled = true;
+            image.color = new Color(1, 1, 1, 1);
             SetSellBInteractable(true);
-            gameObject.name=item.name;
-            image.sprite=item.sprite;
+            gameObject.name = item.name;
+            image.sprite = item.sprite;
         }
     }
     public void OnClickSellB()
     {
-        Setltem(null);  
+        Setltem(null);
+    }
+
+    public void SetVisible(bool visible)
+    {
+        var image = GetComponent<Image>();
+        if (visible)
+        {
+            image.color = new Color(1, 1, 1, 1);
+        }
+        else
+        {
+            image.color = new Color(1, 1, 1, 0);
+        }
     }
 }

@@ -6,6 +6,7 @@ public class DiceRoll : MonoBehaviour
 {
     public GameObject DiceCanvas;
     public static bool isroll = false;
+    public static bool isDiceActive = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,6 @@ public class DiceRoll : MonoBehaviour
     {
         DiceCanvas.SetActive(true);
         isroll = true;
-        
+        isDiceActive = true;
     }
 }

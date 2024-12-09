@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ShopExit : MonoBehaviour
 {
     public GameObject offPanel;
+    PlayerMove playermove;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,8 @@ public class ShopExit : MonoBehaviour
 
     public void NowOut()
     {
+        playermove = FindObjectOfType<PlayerMove>();
+        playermove.isShopLoaded = false;
         offPanel.SetActive(false);
     }
 }

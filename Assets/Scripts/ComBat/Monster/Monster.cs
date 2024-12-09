@@ -62,10 +62,18 @@ public class Monster : MonoBehaviour
 
     void Die()
     {
-        MonsterManager.Inst.RemoveMonster(this);
+        if (MapSceneController.isBoss)
+        {
+            MonsterManager.Inst.RemoveMonster(this);
 
-        TurnManager.Inst.EndTurn();
+            TurnManager.Inst.EndTurn();
+        }
+        else
+        {
+            MonsterManager.Inst.RemoveMonster(this);
 
+            TurnManager.Inst.EndTurn();
+        }
     }
 
     public void Attack(Vector3 playerPosition)

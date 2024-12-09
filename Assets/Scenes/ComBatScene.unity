@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62818162daebb0b48b3cdf0b88628634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pMaxHealth: 20
   pHealth: 20
   pGuard: 0
   duration: 0.2
@@ -542,6 +543,7 @@ GameObject:
   m_Component:
   - component: {fileID: 828254411}
   - component: {fileID: 828254412}
+  - component: {fileID: 828254413}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -584,8 +586,19 @@ MonoBehaviour:
   msAtkText: {fileID: 176988042}
   Player: {fileID: 169764127}
   money: 0
-  buffDamage: 0
-  totalDamage: 0
+  pendingBuffDamage: 0
+--- !u!114 &828254413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828254410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0964685f10d33ca4cbbbdeee0ce99011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &997436798
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,6 +876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adba4d5c6cae4184c90f65bac3670bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeCards: []
   cardSO: {fileID: 11400000, guid: a38cac7fee3e06041adccd81dc089f27, type: 2}
   cardPrefab: {fileID: 2204683088715356579, guid: 0b9de7fbfd3def24486fa19481a36adc, type: 3}
   cards: []

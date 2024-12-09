@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Store : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class Store : MonoBehaviour
             if (i < itemBuffer.items.Count)
             {
                 slot.Setltem(itemBuffer.items[i]);
+
+                var text = slot.transform.GetChild(0).GetComponent<Text>();
+                text.text = slot.item.price.ToString();
             }
             else
             {

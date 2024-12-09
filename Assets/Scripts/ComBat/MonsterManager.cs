@@ -21,7 +21,10 @@ public class MonsterManager : MonoBehaviour
 
     private void Start()
     {
-        SpawnMonster(msSO.monsters[0], spawnPoints[0]);
+        if (!MapSceneController.isBoss)
+            SpawnMonster(msSO.monsters[0], spawnPoints[0]);
+        else
+            SpawnMonster(msSO.monsters[1], spawnPoints[0]);
     }
 
     public void SpawnMonster(MonsterInfo monsterInfo, Transform spawnPoint)

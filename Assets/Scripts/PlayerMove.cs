@@ -13,6 +13,8 @@ public class PlayerMove : MonoBehaviour
 
     private HashSet<GameObject> collidedTiles = new HashSet<GameObject>();
 
+    public bool isShopLoaded = false;
+
 
     void Start()
     // Start is called before the first frame update
@@ -38,14 +40,18 @@ public class PlayerMove : MonoBehaviour
         {
             if (mapSceneController != null)
             {
-                mapSceneController.DisableBattleTile(collision.transform.position);
                 mapSceneController.GoToCombatScene();
             }
         }
 
         else if (collision.tag == "Shop")
         {
-            ShopUI.SetActive(true);
+            if (!isShopLoaded)
+            {
+                mapSceneController.LoadGame();
+                ShopUI.SetActive(true);
+                isShopLoaded = true;
+            }
         }
 
         else if (collision.tag == "Inn")
@@ -55,18 +61,25 @@ public class PlayerMove : MonoBehaviour
 
         else if (collision.tag == "Karma")
         {
-            //ShopUI.SetActive(true);
+            if (mapSceneController != null)
+            {
+                mapSceneController.GoToKarmaScene();
+            }
         }
 
         else if (collision.tag == "MainEvent")
         {
-            //ShopUI.SetActive(true);
+            if (mapSceneController != null)
+            {
+                mapSceneController.GoToKarmaScene();
+            }
         }
 
         else if (collision.tag == "BossBattle")
         {
             if (mapSceneController != null)
             {
+                MapSceneController.isBoss = true;
                 mapSceneController.GoToCombatScene();
             }
         }

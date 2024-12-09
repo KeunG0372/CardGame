@@ -6,5 +6,7 @@ using UnityEngine;
 public class ItemProperty 
 {
     public string name;
+    public int price;
     public Sprite sprite;
+    public int damage;
 }
